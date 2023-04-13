@@ -65,54 +65,54 @@ function game () {
         checkGameEnd ()
     }
 
-    function checkGameEnd () {
-        let n = 5; // play to score
+function checkGameEnd () {
+    let n = 5; // play to score
+    const roundChoices = document.querySelector('.roundChoices');
+    const roundString = document.querySelector('.roundString');
+    const winner = document.querySelector('.winner');
+    if (playerScore === n) {
+        winner.textContent = "Game Over! Player Wins";
+        winner.style.display = "block";
+        buttons.forEach((button) => {
+            button.style.display = "none";
+        });
+        roundString.style.display = "none";
+        roundChoices.style.display = "none";
+        beginNewGame ();
+    } else if (computerScore === n) {
+        winner.textContent = "Game Over! Computer Wins";
+        winner.style.display = "block";
+        buttons.forEach((button) => {
+            button.style.display = "none";
+        });
+        roundString.style.display = "none";
+        roundChoices.style.display = "none";
+        beginNewGame ();
+    }
+}
+
+function beginNewGame () {
+    const newGameButton = document.createElement('button');
+    const results = document.querySelector('#results');
+    newGameButton.classList.add('newGameButton');
+    newGameButton.innerText= "Start a New Game!";
+    results.appendChild(newGameButton);
+    newGameButton.addEventListener('click', () => {
         const roundChoices = document.querySelector('.roundChoices');
         const roundString = document.querySelector('.roundString');
         const winner = document.querySelector('.winner');
-        if (playerScore === n) {
-            winner.textContent = "Game Over! Player Wins";
-            winner.style.display = "block";
-            buttons.forEach((button) => {
-                button.style.display = "none";
-            });
-            roundString.style.display = "none";
-            roundChoices.style.display = "none";
-            beginNewGame ();
-        } else if (computerScore === n) {
-            winner.textContent = "Game Over! Computer Wins";
-            winner.style.display = "block";
-            buttons.forEach((button) => {
-                button.style.display = "none";
-            });
-            roundString.style.display = "none";
-            roundChoices.style.display = "none";
-            beginNewGame ();
-        }
-    }
 
-    function beginNewGame () {
-        const newGameButton = document.createElement('button');
-        const results = document.querySelector('#results');
-        newGameButton.classList.add('newGameButton');
-        newGameButton.innerText= "Start a New Game!";
-        results.appendChild(newGameButton);
-        newGameButton.addEventListener('click', () => {
-            const roundChoices = document.querySelector('.roundChoices');
-            const roundString = document.querySelector('.roundString');
-            const winner = document.querySelector('.winner');
-
-            playersChoice = "";
-            computersChoice = "hello";
-            playerScore = 0;
-            computerScore = 0;
-            buttons.forEach((button) => {
-                button.style.display = "inline";
-            });
-            roundString.style.display = "block";
-            newGameButton.style.display = "none";
-            winner.style.display = "none";
-            game ();
+        playersChoice = "";
+        computersChoice = "hello";
+        playerScore = 0;
+        computerScore = 0;
+        buttons.forEach((button) => {
+            button.style.display = "inline";
+        });
+        roundString.style.display = "block";
+        newGameButton.style.display = "none";
+        winner.style.display = "none";
+        game ();
     })
 }
     
