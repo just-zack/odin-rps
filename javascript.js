@@ -13,6 +13,8 @@ const buttons = document.querySelectorAll('.gameButton');
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
         playersChoice = button.id;
+        const roundChoices = document.querySelector('.roundChoices');
+        roundChoices.style.display = "block";
         game ();
     })
 })
@@ -51,16 +53,15 @@ function playRound (playerSelection, computerSelection) {
 
 function game () {
         let playerSelection = playersChoice;
-        let computerSelection = getComputerChoice ();
 
         const results = document.querySelector('#results');
         const currentScore = document.querySelector('.currentScore');
         const roundChoices = document.querySelector('.roundChoices');
         const roundString = document.querySelector('.roundString');
 
-        roundString.textContent = (playRound (playerSelection, computerSelection));
-        currentScore.textContent = playerScore + "  " + computerScore;
-        roundChoices.textContent = playersChoice.toUpperCase() + " " + computersChoice;
+        roundString.textContent = (playRound (playerSelection, getComputerChoice()));
+        currentScore.textContent = "Player: " + playerScore + "  Computer: " + computerScore;
+        roundChoices.textContent = "Player: " + playersChoice.toUpperCase() + " Computer: " + computersChoice;
         checkGameEnd ()
     }
 
@@ -71,6 +72,7 @@ function game () {
         const winner = document.querySelector('.winner');
         if (playerScore === n) {
             winner.textContent = "Game Over! Player Wins";
+            winner.style.display = "block";
             buttons.forEach((button) => {
                 button.style.display = "none";
             });
@@ -79,6 +81,7 @@ function game () {
             beginNewGame ();
         } else if (computerScore === n) {
             winner.textContent = "Game Over! Computer Wins";
+            winner.style.display = "block";
             buttons.forEach((button) => {
                 button.style.display = "none";
             });
@@ -94,4 +97,22 @@ function game () {
         newGameButton.classList.add('newGameButton');
         newGameButton.innerText= "Start a New Game!";
         results.appendChild(newGameButton);
-    }
+        newGameButton.addEventListener('click', () => {
+            const roundChoices = document.querySelector('.roundChoices');
+            const roundString = document.querySelector('.roundString');
+            const winner = document.querySelector('.winner');
+
+            playersChoice = "";
+            computersChoice = "hello";
+            playerScore = 0;
+            computerScore = 0;
+            buttons.forEach((button) => {
+                button.style.display = "inline";
+            });
+            roundString.style.display = "block";
+            newGameButton.style.display = "none";
+            winner.style.display = "none";
+            game ();
+    })
+}
+    
