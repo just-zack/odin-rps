@@ -8,24 +8,6 @@ function getComputerChoice () {
     let randChoice = gameChoices [Math.floor(Math.random () * gameChoices.length)];
     return randChoice;
 }
-/*
-function getPlayerChoice () {
-    let userChoice = prompt ("Please enter Rock, Paper, or Scissors");
-    if (userChoice === null) {
-        return userChoice;
-    } else {
-        userChoice = userChoice.toLowerCase();
-        return userChoice;
-}
-*/
-// have user select button
-/* This is the single item selector
-const rock = document.querySelector('#rock');
-rock.addEventListener ("click", () => {
-    playersChoice = "rock";
-    game ();
-});
-*/
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
@@ -73,9 +55,20 @@ function game () {
 */
         let playerSelection = playersChoice;
         let computerSelection = getComputerChoice ();
-        console.log(playRound (playerSelection, computerSelection));
-        console.log(playersChoice, computersChoice);
-        console.log(playerScore, computerScore);
+        
+        const results = document.querySelector('#results');
+        const currentScore = document.querySelector('.currentScore');
+        const roundChoices = document.querySelector('.roundChoices');
+        const roundString = document.querySelector('.roundString');
+
+        
+        roundString.textContent = (playRound (playerSelection, computerSelection));
+       // console.log(playRound (playerSelection, computerSelection));
+        currentScore.textContent = playerScore + "  " + computerScore;
+        roundChoices.textContent = playersChoice.toUpperCase() + " " + computersChoice;
+        /*results.appendChild(roundString);
+        results.appendChild(roundChoices);
+        results.appendChild(currentScore);
 /*
     }
 */
